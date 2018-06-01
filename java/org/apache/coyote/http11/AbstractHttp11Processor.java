@@ -1112,7 +1112,7 @@ public abstract class AbstractHttp11Processor<S> extends AbstractProcessor<S> {
             rp.setStage(org.apache.coyote.Constants.STAGE_ENDINPUT);
 
             if (!isAsync() && !comet) {
-                if (org.apache.coyote.Constants.STAGE_SERVICE) {
+                if (getErrorState().isError()) {
                     // If we know we are closing the connection, don't drain
                     // input. This way uploading a 100GB file doesn't tie up the
                     // thread if the servlet has rejected it.
